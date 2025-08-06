@@ -1,0 +1,319 @@
+! -*- bgp -*-
+!
+! QuaggaSRx BGPd sample configuration file
+!
+! $Id: bgpd.conf.sampleSRx,v 6.0 2021/04/12 14:55:38 ob Exp $
+!
+hostname bgpd
+password zebra
+!enable password please-set-at-here
+!
+!bgp multiple-instance
+!
+router bgp 7675
+  bgp router-id 10.0.0.1
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! QuaggaSRx Configuration Extension  
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! Display commands
+! =================
+! For the display, QuaggaSRx seamlessly integrates validation information into 
+!   the standard show [ip] bgp com-mands. The additional information must be 
+!   enabled or disabled within using the srx display command as de-scribed 
+!   above.
+!
+! Turn on/off additional SRx display information for default show commands.
+! [no] srx display
+
+
+
+! Specify Connection Settings for SRx Server. 
+! ===========================================
+!
+! The SRx proxy id MUST be set prior to using the connect command. The 
+!   srx-server uses the proxy ID to link updates to routers. This is can be 
+!   either scripted as IPv4 address or plain 4 byte integer decimal value. It is 
+!   recommended to use the router-id as proxy-id.
+! srx set-proxy-id <id>
+  srx set-proxy-id 10.0.0.1
+
+! Configure the address of the server and its port without connecting.
+! srx set-server <host> <0..65535>
+  srx set-server 127.0.0.1 17900
+
+! Connect the BGP server instance to the SRx server at the given location. The 
+!   preferred method to connect is using “srx set-server” to configure the srx 
+!   server connection and calling “srx connect” without any parameters. The 
+!   Quagga command show/write running-config uses the preferred sequence.
+! srx connect [<host> <0..65535>]
+  srx connect
+
+! Disconnect the BGP server instance from the SRx server. For this command the 
+!   “keep-window” setting is used. (THIS COMMAND SHOULD ONLY BR USED IN CONSOLE)
+! srx disconnect
+
+! "keep-window" specifies the time in seconds the SRx is requested to hold 
+!   information after it is deleted! This allows a router reboot without losing 
+!   the validation result information within SRx.
+! srx keep-window <time>
+
+
+! Configure Transmission of Validation result using BGP updates
+! =============================================================
+!
+! This setting is introduced with QuaggaSRx 0.3.1 and allows communicating 
+!   origin validation results to peers. The given integer value in the range of 
+!   0-255 is used to identify this extended community value string. It will be 
+!   used in the field currently marked as ‘TBD’ [draft-ietf-sidr-origin-validation-signaling].
+!   By default this enables the communication in send and receive mode for all 
+!   iBGP peers. In addition to the draft specification QuaggaSRx allows to 
+!   extend the community into eBGP by adding the parameter ‘include_ebgp’. 
+!   To disable eBGP reconfigure the router using ‘ibgp_only’
+! srx extcommunity <0-255> ( ibgp_only | include_ebgp)
+  srx extcommunity 200 include_ebgp
+
+! Disable the transfer of origin validation results.
+! no srx extcommunity
+
+
+! Configure RPKI Origin Validation, BGPsec Path Validation, and APSA Validation
+! =============================================================================
+
+! The evaluation command allows to enable or disable three forms of validation.
+! For each validation QuaggaSRx provides two different policy knobs:
+!
+!       * Ignore policies
+!       * Local preference policies
+!
+! Using these policies, QuaggaSRx allows to influence the decision process
+!   depending on the outcome of a particular validation. Both policies above 
+!   can be applied to any of the three validation types QuaggaSRx provides. In 
+!   case a particular validation is deactivated, the policy will be deactivated
+!   as well. Important to remember is that in case a policy gets changed, the 
+!   change will only be applied to routes that are processed in the decision
+!   process going forward, previous route selections will not be started 
+!   automatically.  
+!
+! In contrast to previous versions of QuaggaSRx each validation type must be 
+! enabled or disabled separately.
+!
+! [no] srx evaluation (origin | bgpsec [distributed] | aspa)
+  srx evaluation origin
+!  srx evaluation bgpsec
+!  srx evaluation aspa
+
+! "origin"
+! --------------
+! Using this setting origin validation will be performed on each new route 
+! arrival. This mode MUST be active to enable origin validation related 
+! route selection policies.
+!
+! The following results are possible with origin validation processing:
+!   valid       - A ROA exists that covers the announced prefix and origin.
+!   notfound    - No ROA exists for the announced prefix or a less specific.
+!   invalid     - A ROA exists that covers the announced prefix or a less 
+!                 specific prefix, but the origin AS does not match.
+!   (undefined) - Validation not performed yet.
+!
+!
+! "bgpsec" [distributed]
+! -----------------------
+! Using this validation mode allows BGPsec path validation to be performed. This
+! mode MUST be active to enable bgpsec validation related route selection 
+! policies. To allow remote validation using the SRx-Server the "distributed" 
+! flag must be selected. Otherwise all BGPsec validation is performed locally
+! and the public keys for eBGP ASes MUST be accessible to the local SRxCryptoAPI
+! instance. QuaggaSRx does not use the router to cache protocol, it uses the 
+! SRx Server for this task. It is highly recommended to enable distributed mode.
+!
+! To disable the distributed mode, simply use 'srx evaluation bgpsec' without
+! the distributed flag and all future validation will be performed by QuaggaSRx
+! itself.
+!  
+! The following results are possible with BGPsec path validation processing:
+!   valid       - The path was fully validated and all signatures could be 
+!                 verified.
+!   invalid     - The route could not be successfully validated.
+!   (undefined) - Validation not performed yet.
+!
+! "aspa"
+! --------
+! This evaluation mode activates ASPA path validation. This validation is still
+! in its experimental stage, the draft is currently in the SIDROPS working group
+! and is being expected to be modified in the future. The current implementation 
+! is a reference implementation for draft-ietf-sidrops-aspa-verification-07.
+! This mode MUST be active to enable aspa validation related route selection 
+! policies.
+!
+! The following results are possible with origin validation processing:
+!   valid        - 
+!   unknown      -
+!   invalid      -
+!   unverifiable -
+!   (undefined)  - Validation not performed yet.
+!
+! Configure Default Validation Results
+! =====================================
+!
+! Set the default value for origin validation. This value is used until the 
+!   SRx-server provides the real validation value. 
+!   Accepted values are: “valid”, “notfound”, “invalid”, and “undefined”.
+! srx set-origin-value [value]
+  srx set-origin-value undefined
+!
+! Set the default value for path validation. This value is used until the 
+! SRx-server provides the real validation value. 
+! Accepted values are: “valid”, “invalid”, and “undefined”.
+! srx set-bgpsec-value [value]
+  srx set-bgpsec-value undefined
+
+! Set the default value for aspa validation. This value is used until the 
+! SRx-server provides the real validation value. 
+! Accepted values are: “valid”, "undefined", “invalid”, "unverifiable", and “undefined”.
+! srx set-aspa-value [value]
+  srx set-aspa-value undefined
+
+! SRx Policy Configuration
+! =========================
+! QuaggaSRx provides two different policy types"
+! * Ignore updates with selected validation result
+! * Modify the local preference of updates depending on the validation result
+!   This can be done by overwritign the validaition result "set" or additive
+!   manipulating a pre-calculated validation result using "add" and "subtract"
+!
+! To enter the SRx policy tree and activate or deactivate an SRx policy the 
+! following command sequence is used:
+!
+! [no] srx policy (origin|bgpsec|aspa) (ignore|local-preference) ...
+! 
+! With depending sub commands for each policy
+!
+! Ignore policies:
+! ----------------
+! These policies prevent updates with a certain validation result from 
+! entering the decision process. They are stored in the RIB in but will not
+! be considered for route selection.
+!
+! Route Origin Validation:
+!   [no] srx policy origin ignore ( invalid | notfound | undefined )
+!
+! BGPsec Path validation:
+!   [no] srx policy bgpsec ignore ( invalid | undefined )
+!
+! ASPA validation
+!   [no] srx policy aspa ignore ( invalid | unknown | unverifiable | undefined )
+!
+! Any of these ignore policies does if matched to the appropriate validation 
+! remove the given route from the decision process.
+!
+! Local-Preference policies: 
+! --------------------------
+! These policies allow a dynamic modification of each update’s local 
+! preference value in accordance with its validation result. The dynamic 
+! method allows combining other local preference policies with the 
+! validation result policies. In case a dynamic local preference policy 
+! reduces the local preference to a value less than zero “0” (underflow), 
+! the local preference will be adjusted to zero.
+!
+! Route Origin Validation:
+!   [no] srx policy origin local-preference ( valid | invalid | notfound | undefined ) ( add | subtract ) <value> 
+!
+! BGPsec Path Validation :
+!   [no] srx policy bgpsec local-preference ( valid | invalid | undefined ) ( add | subtract ) <value> 
+!
+! ASPA Validation:
+!   [no] srx policy aspa local-preference ( valid | invalid | unknown | unverifiable | undefined ) ( add | subtract ) <value> 
+!
+! Adding "no" does disable the policy and omitting no does enable the policy.
+!
+! By default QuaggaSRx does not enable any policies with the exception of 
+! the policy "ignore-undefined". 
+!
+! ----------------
+! ** IMPORTANT **:
+! ----------------
+!   Policies should not be modified during operations. Changes in policies do 
+!   not trigger a re-evaluation of already installed routes. Only changes due 
+!   to the validation itself of update announcements or withdrawals trigger the 
+!   decision process for re-evaluation of the validation result!
+!
+no srx policy origin ignore undefined
+no srx policy bgpsec ignore undefined
+no srx policy aspa ignore undefined
+
+! Specify BGPsec private key
+! =============================
+! QuaggaSRx allows to have two private keys registered. The parameter active 1|2
+!   specifies which of the keys are used for signing. The key must be available
+!   for the SRxCryptoAPI in DER form. For more information on the keys see the
+!   SRxCryptoAPI documentation.
+!
+! Specify each private key with its key number (0|1) and the algorithm id, and 
+! the 20 byte SKI as 40 byte ASCII hex string 
+! srx bgpsec ski (0|1) <1..254> <key>
+! srx bgpsec ski 0 1 DEADBEEFDEADBEEFDEADBEEFDEADBEEFDEADBEEF
+! srx bgpsec ski 1 1 <key>
+!
+! Select which key to specify as active key
+! srx bgpsec active (0|1) 
+! srx bgpsec active 0
+
+! Specify Local Networks
+! ======================
+ network 10.0.0.0/9
+
+! Specify Neighbors
+! =================
+ neighbor 10.0.1.1 remote-as 7676
+ neighbor 10.0.1.1 ebgp-multihop
+! neighbor 10.0.1.1 route-map set-nexthop out
+
+! Specify type of BGPsec connection
+! ---------------------------------
+! neighbor 10.0.2.1 bgpsec (snd|rec|both)
+ neighbor 10.0.1.1 bgpsec both
+
+! Specify ASPA connection information
+! The neighbor relationship can be 
+!   provider: The peer is a topologically upstream neighbor (transit provider)
+!   customer: The peer is a topologically downstream (customer AS)
+!   sibling:  The peer is transit provider and transit customer.
+!   lateral:  The peering only includes prefixes of customers.
+! For a more detailed explanation of the peering relationships 
+! neighbor 10.0.2.1 aspa (provider|customer|sibling|lateral)
+  neighbor 10.0.1.1 aspa lateral
+
+! Support Extended Message for BGP
+! To enable (announce) the capability use
+! neighbor 10.0.1.1 capability extended
+!
+! To enable a liberal behavior and allow the receiving of extended messages
+! regardless if the capability is negotiated us
+! neighbor 10.0.1.1 capability extended liberal
+!
+! Enabling the liberal behavior does NOT result in announcing the capability.
+! It just allows processing such messages without the negotiation.
+! the liberal behavior can be enabled / disabled during session established.
+! but is not recommended because it might modify the size of the buffer.
+
+ neighbor 10.0.1.1 capability extended
+ neighbor 10.0.1.1 capability extended liberal
+
+!
+! access-list all permit any
+!
+!route-map set-nexthop permit 10
+! match ip address all
+! set ip next-hop 10.0.1.1
+!
+!log file bgpd.log
+!
+
+log stdout
+
+!log stdout debugging
+!debug bgp updates
+!debug bgp bgpsec

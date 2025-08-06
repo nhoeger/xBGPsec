@@ -1,0 +1,193 @@
+For more detailed CHANGELOG information check each module folder.
+
+Version 6.3.3
+ * Updated README.MD file.
+ * Same software components as in Version 6.3.0
+Version 6.3.2
+ * quagga-srx V0.99.22.srx.0.6.0.4_release
+ * srx-server V0.6.2.1_release
+ * srx-crypto-api V0.3.0.6_release
+ * bgpsec-io version_0.2.2.1
+ * examples 0.6.3.1_release
+Version 6.3.1
+ * Updated INSTALL.md and fixed bootstrap (install.sh) script for  Rocky 9
+ * Updated build script
+ * Same software components as in Version 6.3.0
+Version 6.3.0 (ROCKY 9)
+ * quagga-srx V0.99.22.srx.0.6.0.4_release
+ * srx-server V0.6.2.0_release
+ * srx-crypto-api V0.3.0.6_release
+ * bgpsec-io version_0.2.2.1
+ * examples 0.6.3.1_release
+Version 6.2.0
+ * quagga-srx V0.99.22.srx.0.6.0.2_release
+ * srx-server V0.6.1.2_release
+ * srx-crypto-api V0.3.0.4_release
+ * bgpsec-io version_0.2.1.11
+ * examples 0.6.1.0_release (Added TFG-ASPA)
+Version 6.1.5
+ * quagga-srx V0.99.22.srx.0.6.0.2_release
+ * srx-server V0.6.1.2_release
+ * srx-crypto-api V0.3.0.4_release
+ * bgpsec-io version_0.2.1.11
+ * examples 0.6.0.3_release
+Version 6.1.4
+ * quagga-srx V0.99.22.srx.0.6.0.0_release
+ * srx-server V0.6.1.0_release
+ * srx-crypto-api V0.3.0.3_release
+ * bgpsec-io version_0.2.1.10 (Fixed bug for CAPI mode)
+ * examples 0.6.0.0_release
+ * Added the CAPABILITIES.md file
+Version 6.1.3
+ * quagga-srx V0.99.22.srx.0.6.0.0_release
+ * srx-server V0.6.1.0_release
+ * srx-crypto-api V0.3.0.3_release
+ * bgpsec-io version_0.2.1.9 (Fixed bug in configuration generation using -C)
+ * examples 0.6.0.0_release
+Version 6.1.2
+ * Update in README.md file - Restructured and moved sections to INSTALL.md
+ * Added INSTALL.md file
+Version 6.1.1
+ * Update in README.md file - Added error section
+Version 6.1.0
+ * quagga-srx V0.99.22.srx.0.6.0.0_release
+ * srx-server V0.6.1.0_release
+ * srx-crypto-api V0.3.0.3_release
+ * bgpsec-io version_0.2.1.8
+ * examples 0.6.0.0_release
+Version 6.0.3
+ * Update to the README.md file
+Pre Release 6.0.2
+ * quagga-srx V0.99.22.srx.0.6.0.0_release 
+ * srx-server V0.6.0.0_release  
+ * srx-crypto-api V0.3.0.3_release
+ * bgpsec-io version_0.2.1.8
+ * examples 0.6.0.0_release      
+ * Rolled in bgpsec-io modifications of Version 5.1.9
+Pre Release 6.0.1
+ * Update to the README.md file
+Pre Release 6.0.0
+ * quagga-srx V0.99.22.srx.0.6.0.0_release 
+   (Added ASPA processing - Rewrote SRx policy engine)
+ * srx-server V0.6.0.0_release     (Added ASPA processing)
+ * srx-crypto-api V0.3.0.3_release
+ * bgpsec-io version_0.2.1.6
+ * examples 0.6.0.0_release        (Added ASPA examples)
+ * Rolled in modifications of Version 5.1.6 for examples
+ * (ASPA implememtation follows draft-ietf-sidrops-aspa-verification-07)
+Version 5.1.8
+ * quagga-srx V0.99.22.srx.0.4.2.10_release
+ * srx-server V0.5.1.3_release
+ * srx-crypto-api V0.3.0.3_release
+ * bgpsec-io version_0.2.1.7
+ * examples 0.5.1.13_release
+Version 5.1.7
+ * Update to the README.md file
+Version 5.1.6
+ * quagga-srx V0.99.22.srx.0.4.2.10_release
+ * srx-server V0.5.1.2_release
+ * srx-crypto-api V0.3.0.3_release
+ * bgpsec-io version_0.2.1.6
+ * examples 0.5.1.12_release (Improved configuration)
+ * Improved build script and added ip_tool library
+Version 5.1.5
+ * quagga-srx V0.99.22.srx.0.4.2.10_release
+ * srx-server V0.5.1.2_release
+ * srx-crypto-api V0.3.0.3_release
+ * bgpsec-io version_0.2.1.6 (Moved demo keys to examples) 
+ * examples 0.5.1.8_release  (Added examples and more tests)
+Version 5.1.4
+ * quagga-srx V0.99.22.srx.0.4.2.9_release
+ * srx-server V0.5.1.1_release
+ * srx-crypto-api V0.3.0.2_release
+ * bgpsec-io version_0.2.1.4
+Version 5.1.3
+ * quagga-srx V0.99.22.srx.0.4.2.9_release
+ * srx-server V0.5.1.1_release
+ * srx-crypto-api V0.3.0.1_release
+ * bgpsec-io version_0.2.1.3
+Version 5.1.2
+ * quagga-srx V0.99.22.srx.0.4.2.9_release
+ * srx-server V0.5.1.1_release
+ * srx-crypto-api V0.3.0.1_release
+ * bgpsec-io version_0.2.1.1
+ * Build script allows to specify custom installation folder
+Version 5.1.1
+ * quagga-srx V0.99.22.srx.0.4.2.9_release
+ * srx-server V0.5.1.1_release
+ * srx-crypto-api V0.3.0.1_release
+ * bgpsec-io version_0.2.1.1 (Cleaned up code base)
+Version 5.1.0
+ * quagga-srx V0.99.22.srx.0.4.2.7_release
+ * srx-server V0.5.1.0_release
+ * srx-crypto-api V0.3.0.0_release
+ * bgpsec-io version_0.2.1.0
+Version 5.0.6
+ * quagga-srx V0.99.22.srx.0.4.2.6_release
+ * srx-server V0.5.0.5_release
+ * srx-crypto-api V0.2.0.6_release
+ * bgpsec-io version_0.2.0.24
+Version 5.0.5
+ * quagga-srx V0.99.22.srx.0.4.2.6_release
+ * srx-server V0.5.0.5_release
+ * srx-crypto-api V0.2.0.6_release
+ * bgpsec-io version_0.2.0.23
+Version 5.0.4
+ * quagga-srx V0.99.22.srx.0.4.2.6_release
+ * srx-server V0.5.0.5_release
+ * srx-crypto-api V0.2.0.6_release
+ * bgpsec-io version_0.2.0.20
+Version 5.0.1
+ * quagga-srx V0.99.22.srx.0.4.2.6_release
+ * srx-server V0.5.0.2_release
+ * srx-crypto-api V0.2.0.4_release
+ * bgpsec-io version_0.2.0.10
+Version 5.0.0
+ * quagga-srx V0.99.22.srx.0.4.2.4_release
+ * srx-server V0.5.0.0_release
+ * srx-crypto-api V0.2.0.3_release
+ * bgpsec-io version_0.2.0.8
+Version 4.2.2
+ * quagga-srx V0.99.22.srx.0.4.2.3_release
+ * srx-server V0.4.0.2_release
+ * srx-crypto-api V0.2.0.2_release
+ * bgpsec-io version_0.2.0.6
+Version 4.2.1
+ * quagga-srx V0.99.22.srx.0.4.2.2_release
+ * srx-server V0.4.0.2_release
+ * srx-crypto-api V0.2.0.2_release
+ * bgpsec-io version_0.2.0.5
+Version 4.2.0
+ * quagga-srx V0.99.22.srx.0.4.2.1_release
+ * srx-server V0.4.0.1_release
+ * srx-crypto-api V0.2.0.1_release
+ * bgpsec-io version_0.2.0.4
+Version 4.1.5
+ * quagga-srx V0.99.22.srx.0.4.1.5_release
+ * srx-server V0.3.1.0_release
+ * srx-crypto-api V0.1.3.0_release
+Version 4.1.4
+ * quagga-srx V0.99.22.srx.0.4.1.4_release
+ * srx-server V0.3.1.0_release
+ * srx-crypto-api V0.1.2.1_release
+Version 4.1.3
+ * quagga-srx V0.99.22.srx-0.4.1.3a_release
+ * srx-server V0.3.0.8_release
+ * srx-crypto-api V0.1.1.1_release
+Version 4.1.2
+ * quagga-srx V0.99.22.srx-0.4.1.2_release
+ * srx-server V0.3.0.6_release
+ * srx-crypto-api V0.1.1.1_release
+Version 4.1.1
+ * quagga-srx V0.99.22.srx-0.4.1.1_release
+ * srx-server V0.3.0.5_release
+ * srx-crypto-api V0.1.1.0_release
+Version 3.1.1
+ * quagga-srx V0.99.22.srx-0.3.1.1_release
+ * srx-server V0.3.0.3_release
+Version 3.1.0
+ * quagga-srx V0.99.22.srx-0.3.1.0_release
+ * srx-server V0.3.0.3_release
+Version 3.0.1
+ * quagga-srx V0.99.22.srx-0.3.0.1_release
+ * srx-server V0.3.0.1_release

@@ -1,0 +1,105 @@
+ChangeLog information for Quagga is now recorded in our source-code
+management system. Please see:
+
+	http://www.quagga.net/devel.php
+
+
+QuaggaSRx changes are:
+======================
+  0.6.0.4 - June 2024
+    * Fixed linker issues in bgpd/bgp_route.[c|h] and test/bgp_mpath_test.c 
+  0.6.0.3 - Oct 2022
+    * Fix bug in sample configuration
+  0.6.0.2 - Nov 2021
+    * Fix in bgp_info_fetch when prefix is re-originated by same peer
+  0.6.0.1 - Oct 2021
+    * Fixed SPEC file for rpm generation
+  0.6.0.0 - May 2021
+    * Added missing local update ID to show up bgp a.b.c.e
+    * Fixed incorrect local pref display in all versions of show ip bgp
+    * Disabled default origin validation - must be enabled to function.
+    * Moved version and skipped version 5 to align with BGP-SRx Software Suite 
+      version 6 instead.
+    * Added ASPA processing
+    * Modified validation processing by using the validation result from each 
+      validation process (ROV, BGPSEC, ASPA) validation separately.s
+    * Added 'f' as validation result UNVERIFIABLE for ASPA path valiation in 
+      cli command 'show ip bgp'
+    * Added Peering relationships needed for ASPA.
+    * Added the following configuration settings:
+      - srx evaluation aspa
+      - srx neighbor A.B.C.D aspa (customer|provider)
+    * Split function  bgp_srx_evaluation into bgp_srx_set_evaluation and 
+      bgp_srx_unset_evaluation
+    * Changed evaluation setting allowing to enable/disable of each validation
+      method separately.
+
+  0.4.2.9 - August 2020
+    * Fixed sections in configure.ac that did not properly check for the 
+      existence of needed tools depending on configured settings.
+    * Fixed bug in .texi doc files that prevented a proper rpm generation.
+    * Updated spec file and added doc back in. The previous change cased 
+      an error during uninstall.
+
+  0.4.2.8 - July 2020
+    * Updated spec file.
+    * Added include "config.h" to bgpd/bgpd.h
+
+  0.4.2.7 - May - July 2020
+    * Removed doc folder from build scripts due to text compile errors which require
+      --disable-doc and prevent rpms from being created. Might be added at a later 
+      point in time again. Search for ^^ -*-DOC-*- ^^ in 
+      configure.ac, Makefile.am, and redhat/quagga.spec.in
+    * Fixed more issues in configuration script regarding static OpenSSL library
+    * Fixed issues with configuration switch (en/dis)able_srx and (en/dis)able_srxcryptoapi 
+
+  0.4.2.6 - October 2017
+    * Fixed more issues in configuration script
+
+  0.4.2.5 - August - October 2017
+    * Fixed some issues in configuration script
+    * Update RPM spec file. This version will be incompatible with srx-proxy
+      0.5.1, and SRxCryptoAPI 0.3.0
+
+  0.4.2.4 - July 2017
+    * Update implementation to comply with latest BGPsec Protocol specification
+    * Modified the values of CAPABILITY_CODE_BGPSEC and BGP_ATTR_BGPSEC to
+      the IANA assigned values.
+      For backwards compatibility with code written during the time where IANA 
+      did not have the values assigned yet, these values still can be modified 
+      during compile time to other values using -DCAPABILITY_CODE_BGPSEC=<num>
+      and -DBGP_ATTR_BGPSEC=<num>
+      - for backwards compatibility the previously used values were 
+        [CAPABILITY_CODE_BGPSEC=72] and [CAPABILITY_CODE_BGPSEC=30]
+    * Minor Bug Fixes
+
+  0.4.2.3 - February 2017
+    * Minor BUG Fixes
+
+  0.4.2.2 - February 2017
+    * Minor Bug Fixes
+    * Added capability negotiation for Extended Message (> 4094)
+
+  0.4.2.1 - July 2016
+    * Removed unused in line documentation
+    * Minor Bug Fixes
+
+  0.4.2.0 - July 2016
+    * Rewrote BGPSEC Path processing according to bgpsec draft 17
+    * Removed handling of public keys. This must be done in SRxCryptoAPI as 
+      well as SRx-Server
+    * Enabled MPNLRI encoding for IPv4 addresses
+    * Allowing to specify more than one private key for path signing
+    * Minor Bug Fixes
+
+  0.4.1.5 - March 2016
+    * Minor bug fixes
+
+  0.4.1.4 - October 2015
+    * Modified RPM build tool to require SRxCryptoAPI >= 1.2.0
+    * Removed methods used from SRxCryptoAPI 1.1.x
+    * Fixed configuration issues in configure.ac
+
+  0.4.1.3b - October 2015
+    * Started Adding information to ChangeLog
+    * Modified RPM build tool to require SRxCryptoAPI >= 1.1.0 < 1.2.0

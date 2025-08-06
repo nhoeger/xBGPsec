@@ -1,0 +1,160 @@
+ChangeLog for Version 0.6.2.1
+- Added PDU check (syntax and erorr) to ASPA PDU processing
+- Changed data types from u_int... to uint... which follows C99
+- Fixed End Of Data PDU to comply to RFC8210
+- Updated rpki_router_client callback function definitions according to 
+  RFC8210-bis14
+- Fixed segmentation fault in rpkirtr_client when receiving ASPA PDUs.
+- Fixed segmentation fault when starting srx_server with no available 
+  configuration file.
+- Renamed RPKIRouterClient.user into RPKIRouterClient.rpkiHandler to remove 
+  confusion about the context of the field.
+ChangeLog for Version 0.6.2.0
+- Updated to draft RFC8210-bis13 and removed AFI from ASPA PDU.
+ChangeLog for Version 0.6.1.3
+- Fixed server socket and rpki_router client linker error when compiled on ROCKY9
+  by moving the file descriptor variables from header to c file and declaring it
+  external in the header.
+- Updated automake and config to allow compilation on ROCKY 9
+ChangeLog for Version 0.6.1.2
+- Fixed error in configure.ac
+ChangeLog for Version 0.6.1.1
+- Fixed some bugs in ASPA implementation
+ChangeLog for Version 0.6.1.0
+- Increased line buffer in file reader of rpkirtr_svr
+- Fixed issues in APSA algorithm that change the outcome in certain scenarios.
+- Fixed sibling and lateral relation ship where both were incorrectly reversed.
+- Removed dead code
+- Added c99 flag to allow c99 code style 
+- Added srx-server-protocol specification to doc folder
+ChangeLog for Version 0.6.0
+- Fixes spellers in output and ChangeLog
+- Added ASPA processing as specified in draft-ietf-sidrops-aspa-verification-07
+- Added an ASPA trie to maintain ASPA information.
+- Added a new cache to store AS-Path information needed for ASPA processing.as
+- Added ASPA processing to CommandHandler.
+- Added implementation for draft-8210bis which provides ASPA objects for the 
+  router to cache protocol. This is an early adoption of the draft currently
+  active in the IETF SIDROPS working group.
+- Added ASPA PDU processing to RPKI-Handler.
+- Modified SRx-Proxy-Protocol to version 3
+- Modified project email and website
+Changelog for Version 0.5.1
+- Cleaned up leftover settings for SVN revision management settings in Makefile.am
+- Updated spec files.
+- Added additional tool requirement for compilation into configure.ac
+- Added the commands waitFor, pause, and echo to the rpki rtr server
+- Updated using SCA 3.0
+- Extended RPKI Cache test harness commands to allow pausing a script until a 
+  key is pressed.
+- Extended RPKI Cache test harness to wait for up to 60 seconds for a client to 
+  connect. 
+Changelog for Version 0.5.0
+- Removed revision test (0.5.0.7)
+- Removed inline keyword from header files and minor bug fixes (0.5.0.6)
+- Fixed some error handling and fixed verbose output (0.5.0.5)
+- Modified debugging of send and received messages (0.5.0.4)
+- Fixed rpkirtr_srv "cache" printout for router keys (update 0.5.0.3)
+- Fixed protocol version management in RPKI router protocol (update 0.5.0.3)
+- Dampen validation result changes during cache updates to reduce unnecessary
+  churn
+- Added auto completion for commands in RPKI validation cache test harness
+  tool rpkirtr_svr
+- Added SKI cache
+- Included BGPsec path validation (RFC 8205) by using SCA
+- Updated router to cache implementation to follow RFC 8210 (former 6810)
+  This includes ROA and KEY distribution 
+- Modified default port for RPKI-RTR Server to 323 as specified in RFC 6810
+- Replaced calls to legacy function bzero with memset
+Changelog for Version 0.4.0
+- Modified srx-proxy to accept bgpsec path attribute as bgpsec portion.  
+Changelog for Version 0.3.1
+- Added switch --with-la-lib to add static SRx Proxy libraries to distribution 
+  rpm.
+- Added library versioning
+- Libraries are now installed in lib or lib64 depending on the system 
+  architecture.
+- Renamed library libsrx into libSRxProxy to better reflect its function
+- Separated SRx Proxy from SRx server in the main RPM install
+- Rewrote Configuration- and Makefile scripts.
+- Fixed library dependency to use stock libraries
+- Removed auto generated client/srx folder. Include files will be generated 
+  directly into the install directory.
+- interface header files use include <...> rather than "..."
+- Rewrote compilation and integration of Patricia Lib extra source.
+- All extra source removed other than patricia library
+Changelog for Version 0.3.0
+- Fixed bugs in server console for the command show-rpki
+- Fixed assignment error for configuration attribute mode_no_receivequeue
+- Cleaned code from unused variables / functions.
+- Rewrote generation for libpatricia
+- Fixed init.d server daemon script
+- Removed un-used configuration switches.
+- Removed the libconfig library distribution from source package. 
+- Fixed minor output formatting at the remote console.
+- modified the RPM installer in such that the configuration file is not deleted 
+  upon removal. It is renamed into srx_server.conf.rpmsav 
+- Fixed issues with specifying the location of the configuration file.
+- Fixed Memory issue in configuration.c that caused crashes the server on Ubuntu 
+  based Systems. 
+- Changed updated validation state from "Unknown" to "NotFound" - RFC6811
+- Ignore adding white-list entries for ROAs assigned to ASNs reserved for 
+  documentation examples only - RFC5398
+- Fixed missing requirement of RFC 6483 which states an origin cannot be found 
+  if an AS_SET exists. (Its a QuaggaSRx bug but also needs some tweaking here. 
+- Use sync=true as default setting
+- Remodeled the message communication management in srx proxy API. These 
+  management handler allows the user of the SRx proxy to implement an error 
+  handler as well as a general message handler.
+- Disabled command rtr-goodbye in server console due to bugs. 
+  Will be differed to 0.3.1 or later
+- Fixed bugs during connect call and timeout.
+- Fixed the connect and run commands in srx server test harness.
+- Introduced LocalID to allow update management on proxy side.
+- Fixed problem with srx-server parameter --version or --full-version
+- Fixed problem with missing network to host translation for keepWindow values.
+- Removed misleading error output.
+- Fixed problem of duplicate updates in prefix cache. Each validation request 
+  must result in the creation of maximum one update within the prefix cache 
+  only if the update not already exists.
+- Added capability to pre-configure a client mapping from 4 byte proxy ID to  
+  one byte client ID.
+- Added mapping between updates and clients to prevent notification broadcast.
+- Modified socket handling in SRx-Proxy/API to allow the usage of non blocking 
+  sockets.
+- Fixed a bug while reading boolean values from the configuration file. 
+- Add server setting for default keepWindow value of 900 seconds.
+- Some fixes in configure and make. Also adding revision to makefile
+- Removed misleading error messages during shutdown of SRx server.
+- Fix problem with '-h' parameter of srx_server. BZ273
+- Added newline at the end of files to remove compiler warnings
+- Added stdarg.h to includes to allow compilation under Centos 5
+- Update to be compliant to RFC 6810 - No secure transport though.
+- Added command code completion info srx server test harness.
+- Added statistics framework to srx server test harness.
+- Added server side receiver queue. The queue can be deactivated 
+  using mode.no_receivequeue=true|false or --mode.no_receivequeue. 
+- Added server side sender queue. The queue can be deactivated 
+  using mode.no_senderqueue=true|false or --mode.no_senderqueue. 
+- Fixed some memory leaks on proxy side and added non-blocking socket on test 
+  harness
+- Added TCP sending flow control into proxy. In addition extended and fixed 
+  error handling of proxy (see api documentation inline). 
+- Extended logging framework of proxy to allow seamless integration into 
+  clients error logging framework.
+- Renamed some data structures to remove confusion and added documentation to 
+  sever_connection_handler.c
+- Fixed internal IP to int conversion to allow RESET_PROXY to set to IP address.
+- Changed default proxy from 1234 to 10.0.0.1 in test harness
+- Removed lots of dead code.
+- Added processing of update withdrawal. 
+- Added dump-ucache to server console to allow writing the content of the 
+  update cache to the console. 
+- Changed flow for verifyUpdate.
+- Solved problem of update ID collisions.
+- Added command show-proxies to server console.
+- Fixed error messages while connecting to RPKI cache.
+- Fixed problem of multi client support.
+- Added -f<config-file> to srx-server to allow passing different configuration 
+  files.
+- Modified API method signatures.

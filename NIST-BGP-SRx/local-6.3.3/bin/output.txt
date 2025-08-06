@@ -1,0 +1,57 @@
+Start SRx Server Version 0.6.2.1 (10:19:58)
+[SRxCryptoAPI - INFO] Preset local wrapper for all methods!
+[SRxCryptoAPI - INFO] Use custom crypto configuration located in srxcryptoapi.conf
+[SRxCryptoAPI - INFO] Use configuration file "srxcryptoapi.conf"
+[SRxCryptoAPI - INFO] - debug type: not configured! use value 6 
+[SRxCryptoAPI - WARNING] "key_volt" is DEPRECATED, use "key_vault" instead!
+[SRxCryptoAPI - WARNING] key_vault - Invalid directory "../../examples/bgp-srx-examples/bgpsec-keys"
+[SRxCryptoAPI - INFO] - key_ext_private="der"
+[SRxCryptoAPI - INFO] - key_ext_public="cert"
+[SRxCryptoAPI - INFO] - library_name="../../../../../../../lib64/srx/libSRxBGPSecOpenSSL.so"
+[SRxCryptoAPI - INFO] - init_value=""
+[SRxCryptoAPI - WARNING] - 'method_init' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_release' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_freeHashMessage' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_freeSignature' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_getDebugLevel' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_setDebugLevel' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_isAlgorithmSupported' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_sign' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_validate' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_registerPrivateKey' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_unregisterPrivateKey' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_registerPublicKey' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_unregisterPublicKey' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_cleanKeys' MISSING mapping information in configuration file!
+[SRxCryptoAPI - WARNING] - 'method_cleanPrivateKeys' MISSING mapping information in configuration file!
+[SRxCryptoAPI - INFO] Linking "init" to default method!
+[SRxCryptoAPI - INFO] Linking "release" to default method!
+[SRxCryptoAPI - INFO] Linking "freeHashMessage" to default method!
+[SRxCryptoAPI - INFO] Linking "freeSignature" to default method!
+[SRxCryptoAPI - INFO] Linking "setDebugLevel" to default method!
+[SRxCryptoAPI - INFO] Linking "getDebugLevel" to default method!
+[SRxCryptoAPI - INFO] Linking "isAlgorithmSupported" to default method!
+[SRxCryptoAPI - INFO] Linking "sign" to default method!
+[SRxCryptoAPI - INFO] Linking "validate" to default method!
+[SRxCryptoAPI - INFO] Linking "registerPublicKey" to default method!
+[SRxCryptoAPI - INFO] Linking "unregisterPublicKey" to default method!
+[SRxCryptoAPI - INFO] Linking "registerPrivateKey" to default method!
+[SRxCryptoAPI - INFO] Linking "unregisterPrivateKey" to default method!
+[SRxCryptoAPI - INFO] Linking "cleanKeys" to default method!
+[SRxCryptoAPI - INFO] Linking "cleanPrivateKeys" to default method!
+[SRxCryptoAPI - INFO] Initiate library initialization using ''
++--------------------------------------------------------------+
+| API: libBGPSec_OpenSSL.so                                    |
+| WARNING: This API provides a reference implementation for    |
+| BGPSec crypto processing. The key storage provided with this |
+| API does not provide a 'secure' key storage which protects   |
+| against malicious side attacks. Also it is not meant to be   |
+| a FIBS certified key storage.                                |
+| This API uses open source OpenSSL functions and checks, keys |
+| for their correctness and once done, uses it repeatedly!     |
++--------------------------------------------------------------+
+[SRxCryptoAPI - INFO] The internal key initialized storage holds (0 private and 0 public keys)!
+Sending packet with PDU type: 10
+Sending packet with PDU type: 11
+Sending packet with PDU type: 2
+Goodbye!
