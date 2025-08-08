@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use xBGPsec in your research, please cite our forthcoming paper (details will be updated upon publication)."
+title: "xBGPsec: Extended BGP Security Protocol"
+authors:
+  - family-names: Hoeger
+    given-names: N.
+    orcid: https://orcid.org/0009-0000-0467-5345
+date-released: 2025-08-08
+repository-code: https://github.com/nhoeger/xBGPsec
+version: 0.1.0
+license: MIT
