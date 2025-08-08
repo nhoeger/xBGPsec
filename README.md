@@ -20,10 +20,9 @@ This prototype extends the GoBGP router with xBGPsec capabilities and integrates
 
 ## Repository Structure
 
-- `/gobgp-extension`: Modified GoBGP implementation with xBGPsec support
-- `/srx-server`: Enhanced SRx-Server supporting xBGPsec validation
-- `/evaluation`: Scripts and tools for performance and security evaluation
-- `/docs`: Documentation and implementation details
+- `/GoBGPSRx`: Modified GoBGP implementation with xBGPsec support
+- `/NIST-BGP-SRx`: Enhanced NIST framework supporting xBGPsec validation
+- `/docs`: Detailed documentation and implementation details will be provided upon paper publication
 
 ## Installation
 
